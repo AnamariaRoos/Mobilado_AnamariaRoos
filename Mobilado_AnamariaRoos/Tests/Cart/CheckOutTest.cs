@@ -7,13 +7,20 @@ using System.Text;
 
 namespace Mobilado_AnamariaRoos.Tests.Cart
 {
-    class DeleteProductsFromCart : BaseTest
+
+    class CheckOutTest:BaseTest
     {
         string url = FrameworkConstants.GetUrl();
 
-        [Category("CartTest")]
-        [Test]
-        public void DeleteCart()
+        private static IEnumerable<TestCaseData> GetCredentialsDataCsv()
+        {
+            foreach (var values in Utilities.GetGenericData("TestData\\credentialsCheckOut.csv"))
+            {
+                yield return new TestCaseData(values);
+            }
+        }
+        [Test, TestCaseSource("GetCredentialsDataCsv")]
+        public void CheckOut(string email, string name, string firstName, string telephone, string adress, string message)
         {
             testName = TestContext.CurrentContext.Test.Name;
             _test = _extent.CreateTest(testName);
@@ -24,11 +31,8 @@ namespace Mobilado_AnamariaRoos.Tests.Cart
             lv.LivingBeanbags();
             lv.AddCart();
             lv.SeeCart();
-            lv.AddMoreProductsToCart();
-            lv.DeleteProductFromCart();
-            
-            
+            CheckOutPage ck = new CheckOutPage(_driver);
+            ck.CheckOut(email, name, firstName, telephone, adress, message);
         }
     }
-
 }
