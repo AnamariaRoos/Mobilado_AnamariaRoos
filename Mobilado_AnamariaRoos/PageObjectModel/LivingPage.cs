@@ -109,7 +109,7 @@ namespace Mobilado_AnamariaRoos.PageObjectModel
             ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].click();", e);
         }
 
-        //by clicking "+"
+        
         public void AddMoreProductsToCart()
         {
             var addMoreProductInput = Utilities.WaitForFluentElement(driver, 3, By.CssSelector(addMoreProductSelector));
@@ -127,11 +127,12 @@ namespace Mobilado_AnamariaRoos.PageObjectModel
 
         public void DeleteProductFromCart()
         {
-            var deleteProductsInput = Utilities.WaitForFluentElement(driver, 10, By.CssSelector(deleteProductsSelector));
+            var deleteProductsInput = Utilities.WaitForFluentElement(driver, 15, By.CssSelector(deleteProductsSelector));
             Actions actions = new Actions(driver);
             actions.MoveToElement(deleteProductsInput).Build().Perform();
             deleteProductsInput.Click();
-            Thread.Sleep(1000);
+            var emptyCart = Utilities.WaitForFluentElement(driver, 5,By.CssSelector(emptyCartLabelSelector));
+            
         }
 
         
