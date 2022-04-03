@@ -364,4 +364,4 @@ FodyWeavers.xsd
 
 # Test Reports
 Reports
-Reports/#.html
+Reports/*.html
